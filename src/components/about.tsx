@@ -5,7 +5,7 @@ import { SectionHeading, ResumeLink } from "./ui";
 export function About() {
   return (
     <section id="about" className="about-section"><div className="shell section">
-      <SectionHeading number="02" label="ABOUT ME" title={<>From mobile.<br />To systems.<br /><span className="serif-word">To delivery.</span></>}>
+      <SectionHeading label="ABOUT ME" title={<>From mobile.<br />To systems.<br /><span className="accent-text">To delivery.</span></>}>
         <p>I’m Shehroz, a Lead Software Engineer based in {site.location}, with six years of professional experience. I started in mobile development and grew into full-stack engineering, system architecture, and technical leadership.</p>
         <p>I translate complex business requirements into practical software, staying hands-on with implementation while taking ownership of planning, technical decisions, and delivery. My international work includes government institutions in Jordan and enterprise stakeholders in South Africa.</p>
         <p>Working with teams and stakeholders on site has shaped how I gather requirements, explain technical decisions, and support users. I’m continuing to grow professionally, with a developing interest in Applied AI Engineering.</p>

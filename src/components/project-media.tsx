@@ -1,5 +1,6 @@
 import type { Project, ProjectImage } from "@/data/portfolio";
 import { site } from "@/lib/site";
+import { ExternalLink } from "./ui";
 
 function ProjectPicture({ image }: { image: ProjectImage }) {
   // Pre-compressed WebP sources work without a runtime image server on Pages.
@@ -11,25 +12,41 @@ function ProjectPicture({ image }: { image: ProjectImage }) {
   );
 }
 
-export function ProjectMedia({ project }: { project: Project }) {
+export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: () => void }) {
+  const tags = project.stack.length ? project.stack : [project.category, project.kind];
+
   return (
-    <figure className={`project-media media-${project.media.kind} media-${project.id}`}>
+    <figure className={`project-media media-${project.media.kind}`}>
       <div className="project-visual">
-        <div className="project-images">{project.media.images.map(image => <a key={image.src} href={`${site.basePath}${image.src}`} target="_blank" rel="noopener noreferrer" aria-label={`View full-size image: ${image.alt} (opens in a new tab)`}><ProjectPicture image={image} /></a>)}</div>
+        <div className="project-images">
+          {project.media.images.map(image => <ProjectPicture key={image.src} image={image} />)}
+        </div>
+        <button
+          type="button"
+          className="project-preview-trigger"
+          aria-label={`Preview ${project.title}`}
+          aria-haspopup="dialog"
+          onClick={event => {
+            event.currentTarget.focus({ preventScroll: true });
+            onOpen();
+          }}
+        />
       </div>
-      <figcaption>{project.media.caption} · <a href={project.media.source.startsWith("https:") ? project.media.source : site.resume} target="_blank" rel="noopener noreferrer">Source<span className="sr-only"> (opens in a new tab)</span></a></figcaption>
+      <div className="project-tile-overlay">
+        <div className="project-tile-content">
+          <h3 className="project-tile-title">{project.title}</h3>
+          <p className="project-context">{project.context}{project.period && <> · {project.period}</>}</p>
+          <p className="project-description">{project.description}</p>
+          {project.role && <p className="project-role">{project.role}</p>}
+          <ul className="project-tile-tags" aria-label="Project tags">
+            {tags.map(tag => <li key={tag}>{tag}</li>)}
+          </ul>
+        </div>
+        <ExternalLink href={project.link.href} className="project-tile-link">
+          <span className="project-tile-tooltip">{project.link.label}</span>
+          <span className="sr-only"> — {project.title}</span>
+        </ExternalLink>
+      </div>
     </figure>
   );
-}
-
-export function ProjectGallery({ project }: { project: Project }) {
-  if (!project.media.gallery?.length) return null;
-
-  return <div className="case-study-block project-gallery">
-    <h4>Additional public screenshot</h4>
-    {project.media.gallery.map(image => <figure key={image.src}>
-      <a href={`${site.basePath}${image.src}`} target="_blank" rel="noopener noreferrer" aria-label={`View full-size image: ${image.alt} (opens in a new tab)`}><ProjectPicture image={image} /></a>
-      <figcaption>{image.alt}</figcaption>
-    </figure>)}
-  </div>;
 }

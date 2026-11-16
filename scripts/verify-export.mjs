@@ -32,14 +32,22 @@ assert(html.includes('id="contact-heading">Get In Touch'), "Missing requested co
 assert(!html.includes("Have a system to build?"), "Obsolete contact callout remains");
 const projectIds = [...html.matchAll(/data-project-id="([^"]+)"/g)].map(match => match[1]);
 assert.deepEqual(projectIds, ["nmisw", "sdm", "stir", "pantry", "doctrine", "metabuddy"], "Expected exactly the six requested projects in order");
-assert.equal((html.match(/FLAGSHIP PROJECT/g) || []).length, 2, "Expected NMISW and SDM flagship labels");
+const projectLabels = [...html.matchAll(/class="project-card-label"><span>([^<]+)<\/span>/g)].map(match => match[1]);
+assert.deepEqual(projectLabels, [
+  "Government information system",
+  "Enterprise infrastructure platform",
+  "Business website",
+  "Grocery Management Mobile App",
+  "Medical Professionals Networking Mobile App",
+  "Fitness Community Mobile App",
+], "Expected project types above the six project tiles");
 const nmiswCard = html.match(/<article\b[^>]*data-project-id="nmisw"[\s\S]*?<\/article>/)?.[0];
 assert(nmiswCard, "Missing NMISW card");
 for (const technology of ["Laravel", "MySQL", "React.js"]) assert(nmiswCard.includes(`<li>${technology}</li>`), `Missing owner-confirmed NMISW tag: ${technology}`);
 for (const obsolete of ["COHRUS", "Kabil Grills", "PetX", "Kizbin", "5–6 people", "Senior Full Stack Developer", "admin.projectdevelopment.info", "sdm.technologywisdom.com", "drive.google.com/file/d/"]) assert(!html.includes(obsolete), `Obsolete portfolio content: ${obsolete}`);
 assert(html.includes("Lead Software Engineer"), "Missing updated professional title");
 assert(html.includes("Aug 2021–Present") && html.includes("Aug 2020–Jan 2021"), "Incorrect CV dates");
-assert(html.includes("https://nwmis.gov.jo/") && html.includes("nmisw-home-1280.webp") && html.includes("nmisw-arabic-1280.webp"), "Missing verified NMISW link or public screenshots");
+assert(html.includes("https://nwmis.gov.jo/") && html.includes("nmisw-home-1280.webp"), "Missing verified NMISW link or homepage screenshot");
 assert(!html.includes("CV project excerpt") && !html.includes("Website unavailable during verification"), "Obsolete NMISW fallback remains");
 assert.equal((await readFile(resolve(root, "resume/syed-shehroz-sohail-cv.pdf"))).subarray(0, 5).toString(), "%PDF-", "Resume asset is not a PDF");
 const socialImage = html.match(/<meta property="og:image" content="([^"]+)"/);
@@ -62,4 +70,4 @@ async function inspect(directory) {
   }
 }
 await inspect(root);
-console.log(`Static export verified: six requested projects, two flagships, CV dates, ${assets.size} base-prefixed assets, responsive images, downloadable CV, metadata, anchors, 404, and no private references.`);
+console.log(`Static export verified: six requested projects and their labels, CV dates, ${assets.size} base-prefixed assets, responsive images, downloadable CV, metadata, anchors, 404, and no private references.`);

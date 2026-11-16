@@ -2,7 +2,7 @@ export const site = {
   name: "Syed Shehroz Sohail",
   shortName: "Shehroz",
   role: "Lead Software Engineer",
-  headline: "Lead Software Engineer | Senior Full-Stack Engineer | Digitalisation Expert | Technical Leadership",
+  headline: "Lead Software Engineer | Full-Stack Development | Database Architecture | AI-Focused Digitalisation",
   location: "Lahore, Pakistan",
   phone: "+92 305 5179501",
   phoneHref: "+923055179501",
@@ -17,8 +17,10 @@ export const site = {
 } as const;
 
 export const navigation = [
-  { label: "Work", href: "#work" },
+  { label: "Home", href: "#home" },
+  { label: "Portfolio", href: "#work" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
 ] as const;

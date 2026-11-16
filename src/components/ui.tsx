@@ -13,8 +13,8 @@ export function ResumeLink({ children = "Download my CV" }: { children?: ReactNo
   return <a href={site.resume} className="text-link" download="Syed-Shehroz-Sohail-CV.pdf">{children}<Arrow diagonal /><span className="sr-only"> (PDF)</span></a>;
 }
 
-export function SectionHeading({ number, label, title, children }: { number: string; label: string; title: ReactNode; children?: ReactNode }) {
-  return <div className="section-heading"><div><p className="eyebrow"><span>{number} /</span> {label}</p><h2>{title}</h2></div>{children && <div className="section-intro">{children}</div>}</div>;
+export function SectionHeading({ label, title, children }: { label: string; title: ReactNode; children?: ReactNode }) {
+  return <div className="section-heading"><div><p className="eyebrow">{label}</p><h2>{title}</h2></div>{children && <div className="section-intro">{children}</div>}</div>;
 }
 
 export function ServiceIcon({ name }: { name: "web" | "mobile" | "api" | "team" | "transform" }) {

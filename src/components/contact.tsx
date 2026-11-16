@@ -7,8 +7,8 @@ export function Contact() {
       <section id="contact" className="contact-section" aria-labelledby="contact-heading">
         <div className="shell">
           <div className="contact-heading">
+            <p className="eyebrow">Contact</p>
             <h2 id="contact-heading">Get In Touch</h2>
-            <svg className="contact-divider" width="82" height="16" viewBox="0 0 82 16" fill="none" aria-hidden="true"><path d="M2 9c5-8 10-8 15 0s10 8 15 0 10-8 15 0 10 8 15 0 10-8 18 0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
           </div>
           <div className="contact-layout">
             <form className="contact-form" action={site.contactEndpoint} method="POST" aria-label="Contact form">

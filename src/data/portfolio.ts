@@ -31,7 +31,6 @@ export type Project = {
   media: {
     kind: "website" | "mobile";
     images: ProjectImage[];
-    gallery?: ProjectImage[];
     caption: string;
     source: string;
   };
@@ -62,7 +61,6 @@ export const projects: Project[] = [
       "Enabled data-driven reporting to support planning and decision-making.",
       "Connected platform components through database architecture and API integrations.",
     ],
-    outcome: "Platform supporting 1,000+ users, as documented in the CV.",
     stack: ["Laravel", "MySQL", "React.js", "Microsoft Windows Server", "IIS"],
     link: {
       href: "https://nwmis.gov.jo/",
@@ -74,7 +72,6 @@ export const projects: Project[] = [
     media: {
       kind: "website",
       images: [{ src: "/projects/nmisw-home-1280.webp", smallSrc: "/projects/nmisw-home-640.webp", alt: "NMISW public homepage in English, showing Ministry of Environment branding, login, and waste generator and recycler registration entry points", width: 1280, height: 800 }],
-      gallery: [{ src: "/projects/nmisw-arabic-1280.webp", smallSrc: "/projects/nmisw-arabic-640.webp", alt: "NMISW public homepage in Arabic, with right-to-left presentation and registration entry points", width: 1280, height: 800 }],
       caption: "Public NMISW homepage · English",
       source: "https://nwmis.gov.jo/nmis/#/home",
     },
@@ -138,7 +135,7 @@ export const projects: Project[] = [
     title: "Pantry",
     shortTitle: "Pantry",
     category: "Mobile",
-    kind: "Grocery management application",
+    kind: "Grocery Management Mobile App",
     context: "iOS · Pantry Check – Grocery List",
     description: "Mobile grocery management, with frontend development and integrations that connect the app experience to its services.",
     role: "React Native frontend development",
@@ -154,6 +151,7 @@ export const projects: Project[] = [
       images: [
         { src: "/projects/pantry-1.webp", alt: "Official Pantry Check App Store screenshot showing the grocery management application", width: 462, height: 1000 },
         { src: "/projects/pantry-2.webp", alt: "Second official Pantry Check App Store screenshot", width: 462, height: 1000 },
+        { src: "/projects/pantry-3.webp", alt: "Pantry Check shopping list showing grocery items and their prices", width: 600, height: 1299 },
       ],
       caption: "Current public App Store screenshots",
       source: "https://apps.apple.com/us/app/pantry-check-grocery-list/id966702368",
@@ -164,7 +162,7 @@ export const projects: Project[] = [
     title: "Doctrine",
     shortTitle: "Doctrine",
     category: "Mobile",
-    kind: "Medical professionals networking application",
+    kind: "Medical Professionals Networking Mobile App",
     context: "Healthcare community · Mobile",
     description: "A professional networking application connecting medical professionals and supporting collaboration within the healthcare community.",
     role: "Mobile development · Technical coordination and leadership",
@@ -173,7 +171,6 @@ export const projects: Project[] = [
       "Oversaw technical implementation, API integrations, quality assurance, and project delivery.",
     ],
     solution: ["Brought mobile implementation, API integration, and quality assurance together through coordinated technical delivery."],
-    outcome: "Successful project delivery, as documented in the CV.",
     stack: [],
     link: { href: "https://play.google.com/store/apps/details?id=com.doctrine&hl=en_AU", label: "View on Google Play", status: "verified", checkedOn },
     media: {
@@ -181,6 +178,7 @@ export const projects: Project[] = [
       images: [
         { src: "/projects/doctrine-1.webp", alt: "Official Doctrine Google Play screenshot introducing its medical community application", width: 312, height: 592 },
         { src: "/projects/doctrine-2.webp", alt: "Second official Doctrine Google Play screenshot", width: 312, height: 592 },
+        { src: "/projects/doctrine-3.webp", alt: "Doctrine mobile app’s one-time password verification screen", width: 312, height: 592 },
       ],
       caption: "Current public Google Play screenshots",
       source: "https://play.google.com/store/apps/details?id=com.doctrine&hl=en_AU",
@@ -191,7 +189,7 @@ export const projects: Project[] = [
     title: "MetaBuddy",
     shortTitle: "MetaBuddy",
     category: "Mobile",
-    kind: "Fitness community application",
+    kind: "Fitness Community Mobile App",
     context: "Fitness & wellness · Mobile",
     description: "A community-driven fitness platform connecting wellness enthusiasts and promoting healthy lifestyles.",
     role: "Mobile feature development · Project coordination",
@@ -207,6 +205,7 @@ export const projects: Project[] = [
       images: [
         { src: "/projects/metabuddy-1.webp", alt: "Official MetaBuddy Google Play screenshot showing its activity dashboard", width: 273, height: 592 },
         { src: "/projects/metabuddy-2.webp", alt: "Second official MetaBuddy Google Play screenshot", width: 273, height: 592 },
+        { src: "/projects/metabuddy-3.webp", alt: "MetaBuddy community screen showing fitness activities", width: 273, height: 592 },
       ],
       caption: "Current public Google Play screenshots",
       source: "https://play.google.com/store/apps/details?id=app.navy.dxb&hl=en_AU",
