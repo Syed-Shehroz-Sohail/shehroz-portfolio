@@ -1,3 +1,5 @@
+const basePath = process.env.NEXT_PUBLIC_PORTFOLIO_BASE_PATH ?? "";
+
 export const site = {
   name: "Syed Shehroz Sohail",
   shortName: "Shehroz",
@@ -10,10 +12,10 @@ export const site = {
   contactEndpoint: "https://formsubmit.co/syed.shehroz152@amalacademy.org",
   github: "https://github.com/Syed-Shehroz-Sohail",
   linkedin: "https://www.linkedin.com/in/syed-shehroz-sohail-shah/",
-  resume: "/shehroz-portfolio/resume/syed-shehroz-sohail-cv.pdf",
+  resume: `${basePath}/resume/syed-shehroz-sohail-cv.pdf`,
   description: "Syed Shehroz Sohail, Lead Software Engineer in Lahore. Six years of full-stack, mobile, and enterprise engineering, solution architecture, and international project delivery.",
-  url: "https://syed-shehroz-sohail.github.io/shehroz-portfolio/",
-  basePath: "/shehroz-portfolio",
+  url: "https://shehrozit.com/",
+  basePath,
 } as const;
 
 export const navigation = [

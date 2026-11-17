@@ -1,23 +1,37 @@
 import assert from "node:assert/strict";
-import { readFile, access, readdir } from "node:fs/promises";
+import { readFile, access, readdir, stat } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const root = resolve("out");
 const html = await readFile(resolve(root, "index.html"), "utf8");
-const base = "/shehroz-portfolio";
+const base = process.env.NEXT_PUBLIC_PORTFOLIO_BASE_PATH ?? "";
+const origin = "https://export.test";
+const homepage = `${origin}${base}/`;
 for (const required of ["index.html", "404.html", ".nojekyll", "icon.svg", "social-card.svg", "social-card.png", "licenses/Manrope-OFL.txt", "resume/syed-shehroz-sohail-cv.pdf"]) await access(resolve(root, required));
 for (const id of ["home", "main", "work", "about", "services", "skills", "contact"]) assert(html.includes(`id="${id}"`), `Missing section: ${id}`);
 const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
 for (const match of html.matchAll(/href="#([^"]+)"/g)) assert(ids.has(match[1]), `Broken anchor: ${match[1]}`);
-const assets = new Set([...html.matchAll(/(?:src|href)="([^"#]+)"/g)].map(match => match[1].replaceAll("&amp;", "&")).filter(url => url.startsWith("/")));
-for (const match of html.matchAll(/srcset="([^"]+)"/gi)) {
-  for (const candidate of match[1].split(",")) assets.add(candidate.trim().split(/\s+/)[0]);
+const assets = new Set();
+
+async function verifyAsset(reference, from) {
+  if (reference.startsWith("#")) return;
+  const url = new URL(reference.replaceAll("&amp;", "&"), from);
+  if (url.origin !== origin) return;
+  const path = decodeURIComponent(url.pathname);
+  assert(path.startsWith(`${base}/`), `Asset is outside the export mount path: ${url.pathname}`);
+  if (assets.has(path)) return;
+  const file = resolve(root, `.${path.slice(base.length)}`);
+  const info = await stat(file).catch(() => null);
+  assert(info, `Missing exported asset at ${url.pathname}`);
+  if (info.isDirectory()) await access(resolve(file, "index.html"));
+  assets.add(path);
 }
-assert(assets.size > 0, "No exported assets found");
-for (const url of assets) {
-  assert(url.startsWith(`${base}/`), `Missing base path: ${url}`);
-  const path = decodeURIComponent(url.split("?")[0].slice(base.length + 1));
-  await access(resolve(root, path));
+
+for (const [document, from] of [[html, homepage], [await readFile(resolve(root, "404.html"), "utf8"), `${homepage}404.html`]]) {
+  for (const match of document.matchAll(/\s(src|href|srcset)="([^"]+)"/gi)) {
+    const references = match[1].toLowerCase() === "srcset" ? match[2].split(",").map(candidate => candidate.trim().split(/\s+/)[0]) : [match[2]];
+    for (const reference of references) await verifyAsset(reference, from);
+  }
 }
 const contactForm = html.match(/<form\b[^>]*action="([^"]+)"[^>]*method="([^"]+)"[^>]*>([\s\S]*?)<\/form>/);
 assert(contactForm, "Missing contact form");
@@ -52,22 +66,21 @@ assert(!html.includes("CV project excerpt") && !html.includes("Website unavailab
 assert.equal((await readFile(resolve(root, "resume/syed-shehroz-sohail-cv.pdf"))).subarray(0, 5).toString(), "%PDF-", "Resume asset is not a PDF");
 const socialImage = html.match(/<meta property="og:image" content="([^"]+)"/);
 assert(socialImage, "Missing social image metadata");
-assert.equal(new URL(socialImage[1]).pathname, `${base}/social-card.png`, "Social image has an incorrect base path");
+assert.equal(socialImage[1], "https://shehrozit.com/social-card.png", "Social image must use the public root domain");
 async function inspect(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     assert(!["references", "repository.bundle", "git-config", "index-original.html"].includes(entry.name), `Private file exported: ${entry.name}`);
     const path = resolve(directory, entry.name);
     if (entry.isDirectory()) await inspect(path);
-    if (entry.name.endsWith(".css")) {
-      const css = await readFile(path, "utf8");
-      for (const match of css.matchAll(/url\(["']?([^\s"')]+)["']?\)/g)) {
-        const url = match[1];
-        if (url.startsWith("data:")) continue;
-        assert(url.startsWith(`${base}/`), `CSS asset missing base path: ${url}`);
-        await access(resolve(root, decodeURIComponent(url.slice(base.length + 1))));
-      }
+    if (entry.isFile() && /\.(css|html|js|txt)$/.test(entry.name)) {
+      const contents = await readFile(path, "utf8");
+      if (!base) assert(!contents.includes("/shehroz-portfolio/"), `Repository prefix leaked into the root export: ${path}`);
+      if (!entry.name.endsWith(".css")) continue;
+      const from = new URL(path.slice(root.length + 1), homepage);
+      for (const match of contents.matchAll(/url\(["']?([^\s"')]+)["']?\)/g)) await verifyAsset(match[1], from);
     }
   }
 }
 await inspect(root);
-console.log(`Static export verified: six requested projects and their labels, CV dates, ${assets.size} base-prefixed assets, responsive images, downloadable CV, metadata, anchors, 404, and no private references.`);
+for (const extension of [".css", ".js", ".woff2", ".webp"]) assert([...assets].some(path => path.endsWith(extension)), `Missing ${extension} asset references`);
+console.log(`Static export verified at ${base || "/"} with ${assets.size} local asset and navigation URLs, responsive images, fonts, CV, metadata, anchors, and 404.`);

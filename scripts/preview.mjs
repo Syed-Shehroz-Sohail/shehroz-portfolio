@@ -3,16 +3,16 @@ import { readFile, stat } from "node:fs/promises";
 import { extname, resolve, sep } from "node:path";
 
 const root = resolve("out");
-const base = "/shehroz-portfolio";
+const base = process.env.NEXT_PUBLIC_PORTFOLIO_BASE_PATH ?? "";
 const port = Number(process.env.PORT || 3000);
-const mime = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript", ".json": "application/json", ".svg": "image/svg+xml", ".woff2": "font/woff2", ".png": "image/png", ".txt": "text/plain" };
+const mime = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript", ".json": "application/json", ".svg": "image/svg+xml", ".woff2": "font/woff2", ".png": "image/png", ".webp": "image/webp", ".pdf": "application/pdf", ".txt": "text/plain" };
 
 try { await stat(resolve(root, "index.html")); } catch { console.error("Build first: npm run build"); process.exit(1); }
 
 const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url || "/", "http://localhost");
-    if (url.pathname === "/" || url.pathname === base) {
+    if (base && (url.pathname === "/" || url.pathname === base)) {
       response.writeHead(302, { Location: `${base}/` }); response.end(); return;
     }
     if (!url.pathname.startsWith(`${base}/`)) throw new Error("Not found");
