@@ -45,16 +45,18 @@ for (const field of ["name", "email", "message"]) {
 assert(html.includes('id="contact-heading">Get In Touch'), "Missing requested contact heading");
 assert(!html.includes("Have a system to build?"), "Obsolete contact callout remains");
 const projectIds = [...html.matchAll(/data-project-id="([^"]+)"/g)].map(match => match[1]);
-assert.deepEqual(projectIds, ["nmisw", "sdm", "stir", "pantry", "doctrine", "metabuddy"], "Expected exactly the six requested projects in order");
-const projectLabels = [...html.matchAll(/class="project-card-label"><span>([^<]+)<\/span>/g)].map(match => match[1]);
+assert.deepEqual(projectIds, ["nmisw", "sdm", "stir", "six-construction", "enova-estates", "pantry", "doctrine", "metabuddy"], "Expected all eight projects in order");
+const projectLabels = [...html.matchAll(/class="project-card-label"><span>([^<]+)<\/span>/g)].map(match => match[1].replaceAll("&amp;", "&"));
 assert.deepEqual(projectLabels, [
   "Government information system",
   "Enterprise infrastructure platform",
-  "Business website",
+  "Café Website & Digital Menu",
+  "Corporate Website & Interactive Frontend",
+  "Multilingual Real Estate Platform & Admin Portal",
   "Grocery Management Mobile App",
   "Medical Professionals Networking Mobile App",
   "Fitness Community Mobile App",
-], "Expected project types above the six project tiles");
+], "Expected project types above the eight project tiles");
 const nmiswCard = html.match(/<article\b[^>]*data-project-id="nmisw"[\s\S]*?<\/article>/)?.[0];
 assert(nmiswCard, "Missing NMISW card");
 for (const technology of ["Laravel", "MySQL", "React.js"]) assert(nmiswCard.includes(`<li>${technology}</li>`), `Missing owner-confirmed NMISW tag: ${technology}`);

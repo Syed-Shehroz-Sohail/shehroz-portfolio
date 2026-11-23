@@ -2,11 +2,16 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import type { Project } from "@/data/portfolio";
+import type { Project, ProjectDetailSection } from "@/data/portfolio";
 import { site } from "@/lib/site";
 import { ExternalLink } from "./ui";
 
 function ProjectDetails({ project }: { project: Project }) {
+  const detailSections: ProjectDetailSection[] = project.detailSections ?? [{
+    title: project.id === "stir" || project.id === "six-construction" ? "Observable website capabilities" : "Implemented solutions",
+    items: project.solution ?? [],
+  }];
+
   return (
     <div className="project-preview-details">
       <h3>{project.responsibilities.length ? "Responsibilities & project details" : "Project details"}</h3>
@@ -16,10 +21,13 @@ function ProjectDetails({ project }: { project: Project }) {
           <ul>{project.responsibilities.map(item => <li key={item}>{item}</li>)}</ul>
         </div>
       )}
-      <div className="case-study-block">
-        <h4>{project.id === "stir" ? "Observable website capabilities" : "Implemented solutions"}</h4>
-        <ul>{project.solution.map(item => <li key={item}>{item}</li>)}</ul>
-      </div>
+      {detailSections.map(section => (
+        <div className="case-study-block" key={section.title}>
+          <h4>{section.title}</h4>
+          <ul>{section.items.map(item => <li key={item}>{item}</li>)}</ul>
+          {section.link && <ExternalLink href={section.link.href}>{section.link.label}</ExternalLink>}
+        </div>
+      ))}
       {project.outcome && (
         <div className="case-study-block">
           <h4>Documented outcome</h4>

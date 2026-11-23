@@ -7,6 +7,8 @@ The owner explicitly approved screenshots of the supplied public project website
 | `nmisw-home-640.webp`, `nmisw-home-1280.webp` | `https://nwmis.gov.jo/nmis/#/home` | Public homepage in English; header, welcome, login, and registration entry points |
 | `sdm-640.webp`, `sdm-1280.webp` | `https://sdm.nepad.org/sign-in` | Public sign-in page capture; no authenticated data |
 | `stir-640.webp`, `stir-1280.webp` | `https://stircoffee.pk/` | Public café website capture |
+| `six-construction-640.webp`, `six-construction-1280.webp` | `https://sixconstruction.com.pl/` | Public desktop homepage capture with the English navigation and hero video |
+| `enova-estates-640.webp`, `enova-estates-1280.webp` | `https://enovaestates.com/properties` | Public desktop property search page with listing filters |
 | `pantry-1.webp`, `pantry-2.webp`, `pantry-3.webp` | `https://apps.apple.com/us/app/pantry-check-grocery-list/id966702368` | Public App Store screenshots |
 | `doctrine-1.webp`, `doctrine-2.webp`, `doctrine-3.webp` | `https://play.google.com/store/apps/details?id=com.doctrine&hl=en_AU` | Public Google Play screenshots |
 | `metabuddy-1.webp`, `metabuddy-2.webp`, `metabuddy-3.webp` | `https://play.google.com/store/apps/details?id=app.navy.dxb&hl=en_AU` | Public Google Play screenshots |

@@ -6,6 +6,20 @@ export type ProjectImage = {
   height: number;
 };
 
+type ProjectLink = {
+  href: string;
+  label: string;
+  status: "verified" | "unreachable";
+  checkedOn: string;
+  note?: string;
+};
+
+export type ProjectDetailSection = {
+  title: string;
+  items: string[];
+  link?: ProjectLink;
+};
+
 export type Project = {
   id: string;
   title: string;
@@ -17,16 +31,11 @@ export type Project = {
   description: string;
   role?: string;
   responsibilities: string[];
-  solution: string[];
+  solution?: string[];
+  detailSections?: ProjectDetailSection[];
   outcome?: string;
   stack: string[];
-  link: {
-    href: string;
-    label: string;
-    status: "verified" | "unreachable";
-    checkedOn: string;
-    note?: string;
-  };
+  link: ProjectLink;
   flagship?: boolean;
   media: {
     kind: "website" | "mobile";
@@ -47,7 +56,7 @@ export const projects: Project[] = [
     shortTitle: "NMISW",
     category: "Web",
     kind: "Government information system",
-    context: "Jordan · Government institutions, supported through GIZ",
+    context: "Jordan · Delivered through Technology Wisdom in collaboration with GIZ Jordan, Ministry of Environment (MoEnv), and Ministry of Local Administration (MoLA)",
     period: "Jul 2025–Present",
     description: "Centralising municipal waste data, approval workflows, and reporting to support government planning in Jordan.",
     role: "Technical leadership · Full-stack engineering · Project coordination",
@@ -82,7 +91,7 @@ export const projects: Project[] = [
     shortTitle: "SDM",
     category: "Web",
     kind: "Enterprise infrastructure platform",
-    context: "AUDA-NEPAD · African Union Development Agency · South Africa",
+    context: "South Africa · Delivered through Technology Wisdom in collaboration with GIZ South Africa for the African Union Development Agency (AUDA-NEPAD)",
     period: "Jul 2024–Jul 2025",
     description: "Digitalising infrastructure project submissions, evaluations, approvals, and portfolio tracking for AUDA-NEPAD.",
     role: "Full-stack engineering · Solution architecture · End-to-end delivery",
@@ -112,7 +121,7 @@ export const projects: Project[] = [
     title: "STIR Coffee",
     shortTitle: "STIR Coffee",
     category: "Web",
-    kind: "Business website",
+    kind: "Café Website & Digital Menu",
     context: "Speciality coffee · Kitchen · Community",
     description: "A café presentation with a searchable coffee and kitchen menu, helping visitors browse items, descriptions, and prices.",
     responsibilities: [],
@@ -121,13 +130,80 @@ export const projects: Project[] = [
       "Visitors can navigate drinks and kitchen categories, with sections for coffee, matcha, breakfast, sandwiches, pasta, and more.",
       "Menu search filters matching items, including searches such as “pistachio”. Item descriptions, customisations, and PKR prices are displayed.",
     ],
-    stack: [],
+    stack: ["HTML", "CSS", "Vanilla JavaScript"],
     link: { href: "https://stircoffee.pk/", label: "Explore STIR Coffee", status: "verified", checkedOn },
     media: {
       kind: "website",
       images: [{ src: "/projects/stir-1280.webp", smallSrc: "/projects/stir-640.webp", alt: "STIR Coffee’s public website showing its café photography and drinks and kitchen menu navigation", width: 1280, height: 720 }],
       caption: "Public website capture · café presentation",
       source: "https://stircoffee.pk/",
+    },
+  },
+  {
+    id: "six-construction",
+    title: "SIX Construction",
+    shortTitle: "SIX Construction",
+    category: "Web",
+    kind: "Corporate Website & Interactive Frontend",
+    context: "Poland",
+    description: "Developed interactive frontend experiences for a Polish construction company's corporate website, featuring an engaging presentation of its services, construction projects, company information, and news.",
+    responsibilities: [
+      "Implemented interactive frontend functionality and animations using JavaScript and GSAP.",
+      "Worked on visual interactions and presentation of website content.",
+      "Used JavaScript libraries for interactive UI elements where applicable.",
+    ],
+    solution: [
+      "The site presents company information and services, links to individual construction project profiles, and provides Polish and English versions.",
+      "The Latest News carousel uses Swiper.js with previous and next buttons and keyboard navigation.",
+    ],
+    stack: ["HTML", "CSS", "JavaScript", "GSAP (CDN)", "Swiper.js"],
+    link: { href: "https://sixconstruction.com.pl/", label: "Visit SIX Construction", status: "verified", checkedOn: "2026-11-23" },
+    media: {
+      kind: "website",
+      images: [{ src: "/projects/six-construction-1280.webp", smallSrc: "/projects/six-construction-640.webp", alt: "SIX Construction’s English homepage with a sidebar menu and aerial construction-site footage", width: 1280, height: 800 }],
+      caption: "Public SIX Construction homepage · English",
+      source: "https://sixconstruction.com.pl/",
+    },
+  },
+  {
+    id: "enova-estates",
+    title: "Enova Estates",
+    shortTitle: "Enova Estates",
+    category: "Web",
+    kind: "Multilingual Real Estate Platform & Admin Portal",
+    context: "Spain",
+    description: "Developed a multilingual real estate platform and its administration portal for Enova Estates, delivering responsive property browsing experiences, interactive mapping, seven-language support, and a dedicated administrative interface.",
+    responsibilities: [
+      "Developed the public-facing website using React.js and Tailwind CSS.",
+      "Integrated Leaflet.js for interactive property mapping.",
+      "Implemented multilingual support across seven languages.",
+      "Integrated Google Analytics for website traffic analysis.",
+      "Developed the dedicated administration portal for managing website operations.",
+    ],
+    detailSections: [
+      {
+        title: "Public website",
+        items: [
+          "Property listings and discovery.",
+          "Search and filtering interfaces.",
+          "Interactive property maps.",
+          "Available in English, Spanish, German, French, Swedish, Norwegian, and Danish.",
+          "Responsive interface for desktop and mobile browsing.",
+        ],
+      },
+      {
+        title: "Administration portal",
+        items: ["Dedicated administration interface.", "Administrative sign-in with email and password."],
+        link: { href: "https://enovaestates.com/admin/login", label: "Open admin portal sign-in", status: "verified", checkedOn: "2026-11-23" },
+      },
+    ],
+    stack: ["React.js", "Leaflet.js", "Tailwind CSS", "Google Analytics"],
+    link: { href: "https://enovaestates.com/", label: "Visit Enova Estates public website", status: "verified", checkedOn: "2026-11-23" },
+    media: {
+      kind: "website",
+      images: [{ src: "/projects/enova-estates-1280.webp", smallSrc: "/projects/enova-estates-640.webp", alt: "Enova Estates’ public property search page with location, property type, and price filters", width: 1280, height: 720 }],
+      caption: "Public Enova Estates property search · English",
+      source: "https://enovaestates.com/properties",
     },
   },
   {

@@ -47,13 +47,13 @@ HTTP success establishes that a destination responded during this check; it does
 
 ## Information requiring owner confirmation
 
-1. **STIR Coffee:** exact responsibilities, development period, technologies, and any documented outcomes. The public showcase currently describes only observable website functionality; it makes no personal contribution or stack claim.
+1. **STIR Coffee:** exact responsibilities, development period, and any documented outcomes. The showcase lists HTML, CSS, and Vanilla JavaScript as supplied by the owner.
 2. **Unspecified project frameworks:** The mobile frameworks for Doctrine and MetaBuddy are absent from the CV. Supply them only if they should be shown as project-specific technologies. NMISW’s Laravel, MySQL, and React.js stack has now been explicitly confirmed by the owner and added to its tags.
 3. **LinkedIn availability:** confirm the direct CV link in a normal signed-in or public browser; automated access is restricted.
 
 ## Local validation
 
-Run `npm run lint`, `npm run typecheck`, `npm run build`, and `npm run verify:export`. The export check requires exactly the six requested projects, both flagship labels, updated CV dates, removal of retired content, valid static image paths, and the downloadable PDF. Biome provides syntax, correctness, and accessibility lint checks without requiring a TypeScript compiler downgrade. CSS component specificity ordering is intentionally allowed, and reduced-motion overrides keep precedence.
+Run `npm run lint`, `npm run typecheck`, `npm run build`, and `npm run verify:export`. The export check requires the eight project cards in order, their category labels, updated CV dates, removal of retired content, valid static image paths, and the downloadable PDF. Biome provides syntax, correctness, and accessibility lint checks without requiring a TypeScript compiler downgrade. CSS component specificity ordering is intentionally allowed, and reduced-motion overrides keep precedence.
 
 The prior local implementation is backed up under ignored `.local/profile-update/before/`. Raw PDF extraction, rendered CV pages, public-page retrievals, screenshot originals, link-check responses, and source asset URLs are kept under ignored `.local/profile-update/`. The earlier permanent private backup and reference templates remain untouched outside this repository.
 

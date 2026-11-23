@@ -166,6 +166,7 @@ html:has(.project-preview[open]) { overflow: hidden; }
 .case-study-block p, .case-study-block li { color: #d1cfc5; font-size: 14px; line-height: 1.7; }
 .case-study-block ul { list-style: disc; padding-inline-start: 21px; }
 .case-study-block li + li { margin-top: 5px; }
+.case-study-block > .text-link { margin-top: 4px; color: #f3c39f; }
 .about-section { background: #eaece3; }
 .about-section .section-heading { align-items: center; }
 .about-section .section-intro { max-width: 375px; }
