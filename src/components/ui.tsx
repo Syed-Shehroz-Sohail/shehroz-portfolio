@@ -9,8 +9,8 @@ export function ExternalLink({ href, children, className = "text-link" }: { href
   return <a href={href} target="_blank" rel="noopener noreferrer" className={className}>{children}<Arrow diagonal /><span className="sr-only"> (opens in a new tab)</span></a>;
 }
 
-export function ResumeLink({ children = "Download my CV" }: { children?: ReactNode }) {
-  return <a href={site.resume} className="text-link" download="Syed-Shehroz-Sohail-CV.pdf">{children}<Arrow diagonal /><span className="sr-only"> (PDF)</span></a>;
+export function ResumeLink({ children = "Download my CV", className = "text-link" }: { children?: ReactNode; className?: string }) {
+  return <a href={site.resume} className={className} download="Syed-Shehroz-Sohail-CV.pdf">{children}<Arrow diagonal /><span className="sr-only"> (PDF)</span></a>;
 }
 
 export function SectionHeading({ label, title, children }: { label: string; title: ReactNode; children?: ReactNode }) {

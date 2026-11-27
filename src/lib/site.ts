@@ -10,7 +10,6 @@ export const site = {
   phoneHref: "+923055179501",
   email: "syed.shehroz152@amalacademy.org",
   contactEndpoint: "https://formsubmit.co/syed.shehroz152@amalacademy.org",
-  github: "https://github.com/Syed-Shehroz-Sohail",
   linkedin: "https://www.linkedin.com/in/syed-shehroz-sohail-shah/",
   resume: `${basePath}/resume/syed-shehroz-sohail-cv.pdf`,
   description: "Syed Shehroz Sohail, Lead Software Engineer in Lahore. Six years of full-stack, mobile, and enterprise engineering, solution architecture, and international project delivery.",
@@ -22,7 +21,7 @@ export const navigation = [
   { label: "Home", href: "#home" },
   { label: "Portfolio", href: "#work" },
   { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
   { label: "Skills", href: "#skills" },
+  { label: "Services", href: "#services" },
   { label: "Contact", href: "#contact" },
 ] as const;

@@ -1,6 +1,21 @@
 import { skills } from "@/data/portfolio";
-import { SectionHeading } from "./ui";
 
 export function Skills() {
-  return <section id="skills" className="skills-section"><div className="section shell"><SectionHeading label="THE TOOLKIT" title={<>Different tools.<br /><span className="accent-text">A shared purpose.</span></>}><p>The technologies I work with, and the skills that help turn a codebase into a useful product.</p></SectionHeading><div className="skills-list">{skills.map(skill => <article className="skill-row" key={skill.name}><span className="skill-number">{skill.number}</span><div className="skill-name"><h3>{skill.name}</h3><p>{skill.detail}</p></div><div className="tags">{skill.tools.map(tool => <span key={tool}>{tool}</span>)}</div></article>)}</div></div></section>;
+  return (
+    <section id="skills" className="skills-section" aria-labelledby="skills-heading">
+      <h3 id="skills-heading">Expertise <span className="accent-text">Highlights</span></h3>
+      <div className="skills-list">
+        {skills.map(skill => (
+          <article className="skill-row" key={skill.name}>
+            <span className="skill-number">{skill.number}</span>
+            <div className="skill-name">
+              <h4>{skill.name}</h4>
+              <p>{skill.detail}</p>
+            </div>
+            <div className="tags">{skill.tools.map(tool => <span key={tool}>{tool}</span>)}</div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
 }

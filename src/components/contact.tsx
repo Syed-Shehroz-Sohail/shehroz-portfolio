@@ -23,9 +23,13 @@ export function Contact() {
               <address><dl>
                 <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
                 <div><dt>Phone</dt><dd><a href={`tel:${site.phoneHref}`}>{site.phone}</a></dd></div>
-                <div><dt>Location</dt><dd>{site.location}</dd></div>
+                <div><dt>Availability</dt><dd>Worldwide Clients</dd></div>
               </dl></address>
-              <div className="contact-socials"><ExternalLink href={site.github}>GitHub</ExternalLink><ExternalLink href={site.linkedin}>LinkedIn</ExternalLink><ResumeLink>Download CV</ResumeLink></div>
+              <div className="contact-socials">
+                <ExternalLink href={`https://wa.me/${site.phoneHref.replace(/\D/g, "")}`}>WhatsApp</ExternalLink>
+                <ExternalLink href={site.linkedin}>LinkedIn</ExternalLink>
+                <ResumeLink>Download CV</ResumeLink>
+              </div>
             </div>
           </div>
         </div>

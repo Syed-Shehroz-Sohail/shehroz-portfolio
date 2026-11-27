@@ -48,7 +48,7 @@ HTTP success establishes that a destination responded during this check; it does
 ## Information requiring owner confirmation
 
 1. **STIR Coffee:** exact responsibilities, development period, and any documented outcomes. The showcase lists HTML, CSS, and Vanilla JavaScript as supplied by the owner.
-2. **Unspecified project frameworks:** The mobile frameworks for Doctrine and MetaBuddy are absent from the CV. Supply them only if they should be shown as project-specific technologies. NMISW’s Laravel, MySQL, and React.js stack has now been explicitly confirmed by the owner and added to its tags.
+2. **Doctrine’s mobile framework** remains unspecified. The owner supplied Flutter for MetaBuddy and Node.js for Pantry and confirmed NMISW’s Laravel, MySQL, and React.js tags.
 3. **LinkedIn availability:** confirm the direct CV link in a normal signed-in or public browser; automated access is restricted.
 
 ## Local validation
